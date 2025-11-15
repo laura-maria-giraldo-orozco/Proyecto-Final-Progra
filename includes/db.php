@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: includes/db.php
-// Conexión básica MySQL
-// ==============================
 
 $host = "localhost";
 $user = "root";

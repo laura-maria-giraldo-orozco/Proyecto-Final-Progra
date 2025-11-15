@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: admin/dashboard.php
-// Dashboard del administrador
-// ==============================
 
 require_once "../includes/auth.php";
 requireRole('admin');

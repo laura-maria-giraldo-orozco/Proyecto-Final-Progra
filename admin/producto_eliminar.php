@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: admin/producto_eliminar.php
-// Eliminar producto
-// ==============================
 
 require_once "../includes/auth.php";
 requireRole('admin');

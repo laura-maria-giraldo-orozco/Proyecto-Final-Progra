@@ -1,9 +1,5 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: admin/producto_nuevo.php
-// Crear nuevo producto
-// ==============================
+
 
 require_once "../includes/auth.php";
 requireRole('admin');
@@ -17,70 +13,105 @@ $esAdmin = true;
 $mensaje = "";
 $errores = [];
 
+// Verifica si el formulario fue enviado mediante POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Se obtienen los valores ingresados en el formulario
     $nombre = trim($_POST["nombre"]);
     $descripcion = trim($_POST["descripcion"]);
     $precio = trim($_POST["precio"]);
     $categoria = trim($_POST["categoria"]);
     $stock = trim($_POST["stock"]);
 
-    // Validaciones
+    // Valida que el nombre no esté vacío
     if ($nombre === "") {
         $errores[] = "El nombre es obligatorio.";
     }
+
+    // Valida que el precio sea un número y mayor que 0
     if ($precio === "" || !is_numeric($precio) || $precio <= 0) {
         $errores[] = "El precio debe ser un número válido mayor a 0.";
     }
+
+    // Valida que el stock sea un número entero mayor o igual a 0
     if ($stock === "" || !is_numeric($stock) || $stock < 0) {
         $errores[] = "El stock debe ser un número válido mayor o igual a 0.";
     }
 
-    // Procesar imagen
+  
     $imagen = "";
+
+    // Verifica si se subió un archivo sin errores
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
         $file = $_FILES['imagen'];
-        $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        $max_size = 5 * 1024 * 1024; // 5MB
 
+        // Tipos de archivo permitidos
+        $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+        // Tamaño máximo (5 MB)
+        $max_size = 5 * 1024 * 1024;
+
+        // Verifica el tipo de archivo
         if (!in_array($file['type'], $allowed)) {
             $errores[] = "El archivo debe ser una imagen (JPEG, PNG, GIF o WebP).";
+
+        // Verifica el tamaño
         } elseif ($file['size'] > $max_size) {
             $errores[] = "La imagen no debe superar los 5MB.";
+
         } else {
+            // Obtiene la extensión del archivo
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+            // Genera un nombre único para evitar conflictos
             $imagen = uniqid() . '.' . $extension;
+
+            // Ruta donde se guardarán las imágenes
             $upload_dir = '../uploads/productos/';
             
+            // Crea la carpeta si no existe
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, 0777, true);
             }
-            
+
+            // Mueve el archivo subido a su carpeta definitiva
             if (!move_uploaded_file($file['tmp_name'], $upload_dir . $imagen)) {
                 $errores[] = "Error al subir la imagen.";
             }
         }
     }
 
+
     if (empty($errores)) {
+      
         $precio = floatval($precio);
         $stock = intval($stock);
+
+        // Limpia la categoría si viene vacía
         $categoria = $categoria !== "" ? $categoria : null;
 
+        // Prepara la consulta SQL para insertar el producto
         $stmt = $conn->prepare("INSERT INTO productos (nombre, descripcion, precio, categoria, stock, imagen) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssdsis", $nombre, $descripcion, $precio, $categoria, $stock, $imagen);
 
+        // Ejecuta la consulta
         if ($stmt->execute()) {
+            // Redirige si todo salió bien
             header("Location: productos.php?mensaje=Producto creado correctamente");
             exit;
         } else {
+            // Error al ejecutar
             $mensaje = "Error al crear el producto.";
         }
+
         $stmt->close();
+
     } else {
+        // Si hubo errores, se muestran juntos
         $mensaje = implode("<br>", $errores);
     }
 }
 
+// Obtiene las categorías disponibles para mostrar en el formulario
 $categorias = obtenerCategorias();
 
 include "../includes/header.php";

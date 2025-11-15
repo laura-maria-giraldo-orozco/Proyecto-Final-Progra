@@ -1,9 +1,5 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: user/historial.php
-// Historial de compras
-// ==============================
+
 
 require_once "../includes/auth.php";
 requireRole('usuario');

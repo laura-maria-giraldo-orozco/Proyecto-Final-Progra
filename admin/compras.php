@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: admin/compras.php
-// Gestión de compras
-// ==============================
 
 require_once "../includes/auth.php";
 requireRole('admin');
@@ -71,9 +66,11 @@ if ($busqueda !== '') {
     $params[] = $busqueda_param;
     $types .= "ss";
 }
-
+// Ordenar las compras desde la más reciente
 $query .= " ORDER BY c.fecha DESC";
 
+
+// Preparar statement y pasar parámetros si existen
 $stmt = $conn->prepare($query);
 if (!empty($params)) {
     $stmt->bind_param($types, ...$params);
@@ -81,6 +78,8 @@ if (!empty($params)) {
 $stmt->execute();
 $result = $stmt->get_result();
 $compras = [];
+
+// Guardar todas las compras encontradas en un arreglo
 while ($row = $result->fetch_assoc()) {
     $compras[] = $row;
 }

@@ -1,8 +1,3 @@
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: assets/js/carrito.js
-// Funcionalidades del carrito
-// ==============================
 
 document.addEventListener('DOMContentLoaded', function() {
     // Actualizar cantidad en carrito

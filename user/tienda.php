@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: user/tienda.php
-// Tienda de productos
-// ==============================
 
 require_once "../includes/auth.php";
 requireRole('usuario');

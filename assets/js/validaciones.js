@@ -1,8 +1,3 @@
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: assets/js/validaciones.js
-// Validaciones de formularios
-// ==============================
 
 document.addEventListener('DOMContentLoaded', function() {
     // Validar formularios de registro

@@ -1,8 +1,3 @@
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: assets/js/alerts.js
-// Sistema de alertas
-// ==============================
 
 document.addEventListener('DOMContentLoaded', function() {
     // Auto-ocultar alertas después de 5 segundos

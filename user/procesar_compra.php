@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: user/procesar_compra.php
-// Procesar compra
-// ==============================
 
 require_once "../includes/auth.php";
 requireRole('usuario');

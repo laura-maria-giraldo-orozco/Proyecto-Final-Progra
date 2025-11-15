@@ -1,9 +1,5 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: logout.php
-// Cerrar sesión
-// ==============================
+
 
 session_start();
 

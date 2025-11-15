@@ -1,10 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: login.php
-// Desarrollado en PHP puro
-// ==============================
-
 session_start();
 require_once "includes/db.php"; // Archivo de conexión a la BD
 

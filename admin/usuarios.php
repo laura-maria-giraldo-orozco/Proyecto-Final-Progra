@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: admin/usuarios.php
-// Gestión de usuarios
-// ==============================
 
 require_once "../includes/auth.php";
 requireRole('admin');
@@ -39,7 +34,7 @@ if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
 
     // No permitir eliminar el propio usuario
     if ($id != $_SESSION['user_id']) {
-        // NUEVO: Primero eliminar los detalles de las compras del usuario
+        // Primero eliminar los detalles de las compras del usuario
         $stmt = $conn->prepare("DELETE dc FROM detalle_compra dc 
                                INNER JOIN compras c ON dc.compra_id = c.id 
                                WHERE c.usuario_id = ?");
@@ -47,7 +42,7 @@ if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
         $stmt->execute();
         $stmt->close();
 
-        // NUEVO: Luego eliminar las compras del usuario
+        // Luego eliminar las compras del usuario
         $stmt = $conn->prepare("DELETE FROM compras WHERE usuario_id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();

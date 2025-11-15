@@ -1,9 +1,5 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: includes/auth.php
-// Verificación de autenticación
-// ==============================
+
 
 session_start();
 

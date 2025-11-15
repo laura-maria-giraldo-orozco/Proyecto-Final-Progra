@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: admin/productos.php
-// Gestión de productos
-// ==============================
 
 require_once "../includes/auth.php";
 requireRole('admin');

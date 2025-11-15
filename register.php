@@ -1,9 +1,4 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: register.php
-// Registro de nuevos usuarios
-// ==============================
 
 session_start();
 require_once "includes/db.php";

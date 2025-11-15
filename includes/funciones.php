@@ -1,39 +1,34 @@
 <?php
-// ==============================
-// CARNICERÍA LA MORGUE
-// Archivo: includes/funciones.php
-// Funciones auxiliares
-// ==============================
+
 
 require_once "db.php";
 
-/**
- * Sanitizar entrada de datos
- */
+ //Sanitizar entrada de datos
+
 function sanitizar($data)
 {
     return htmlspecialchars(strip_tags(trim($data)));
 }
 
-/**
- * Formatear precio
- */
+
+//Formatear precio
+
 function formatearPrecio($precio)
 {
     return "$" . number_format($precio, 0, ',', '.');
 }
 
-/**
- * Validar email
- */
+
+ // Validar email
+ 
 function validarEmail($email)
 {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-/**
- * Obtener categorías de productos
- */
+
+ //Obtener categorías de productos
+ 
 function obtenerCategorias()
 {
     global $conn;
@@ -48,9 +43,9 @@ function obtenerCategorias()
     return $categorias;
 }
 
-/**
- * Obtener total de productos en carrito
- */
+
+ //Obtener total de productos en carrito
+ 
 function obtenerTotalCarrito()
 {
     if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
@@ -63,9 +58,9 @@ function obtenerTotalCarrito()
     return $total;
 }
 
-/**
- * Calcular total del carrito
- */
+
+//Calcular total del carrito
+
 function calcularTotalCarrito()
 {
     if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
